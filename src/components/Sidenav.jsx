@@ -1,39 +1,60 @@
-import React, { useState } from 'react';
-import './Sidenav.css';  // Add the CSS file for styling
-import { FaBars } from "react-icons/fa";
- // Import an icon for the toggle button
+import React, { useState } from "react";
+import "./Sidenav.css";
+import { FaBars } from "react-icons/fa"; // Import toggle button icon
+import { Link } from "react-router-dom"; // For routing
 
 const Sidenav = () => {
-  const [isOpen, setIsOpen] = useState(true);  // State to manage sidenav visibility
+  const [isOpen, setIsOpen] = useState(false); // State to toggle sidenav
 
-  // Toggle function
+  // Function to toggle sidenav
   const toggleSidenav = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <div>
-      {/* Toggle Button for Sidenav */}
+      {/* Toggle Button */}
       <button className="toggle-btn" onClick={toggleSidenav}>
-        <FaBars />   
+        <FaBars />
       </button>
 
       {/* Sidenav */}
-      <div className={`sidenav ${isOpen ? 'open' : 'closed'}`}>
+      <div className={`sidenav ${isOpen ? "open" : "closed"}`}>
         <div className="sidenav-header">
           <h2>HabitNow</h2>
-          <p>Monday 9 December 2024</p>
+          <p>{new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
         </div>
         <ul className="sidenav-links">
-          <li>Home</li>
-          <li>Timer</li>
-          <li>Categories</li>
-          <li>Customize</li>
-          <li>Settings</li>
-          <li>Backups</li>
-          <li>Get premium</li>
-          <li>Rate this app</li>
-          <li>Contact us</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/timer">Timer</Link>
+          </li>
+          <li>
+            <Link to="/categories">Categories</Link>
+          </li>
+          <li>
+            <Link to="/customize">Customize</Link>
+          </li>
+          <li>
+            <Link to="/setting">Settings</Link>
+          </li>
+          <li>
+            <Link to="/backups">Backups</Link>
+          </li>
+          <li>
+            <Link to="/premium">Get Premium</Link>
+          </li>
+          <li>
+            <Link to="/rate">Rate this App</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
         </ul>
       </div>
     </div>
