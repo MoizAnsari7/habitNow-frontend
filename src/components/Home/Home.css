@@ -164,10 +164,23 @@ body {
     }
   
     .fab {
-      width: 50px;
-      height: 50px;
-      font-size: 1.2rem;
-    }
+        position: fixed;
+        bottom: 120px;
+        right: 20px;
+        background-color: #e91e63;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        font-size: 0.5rem;
+        cursor: pointer;
+        z-index: 10;
+      }
   
     .center-content {
       min-height: 50vh; /* Adjust height for smaller screens */
@@ -187,3 +200,94 @@ body {
     }
   }
   
+
+  .Plus {
+    font-size: 1.5rem; /* Increase the size of the Plus icon */
+  }
+/* Modal Styles */
+.modal {
+    position: fixed;
+    bottom: -100%; /* Initially off-screen at the bottom */
+    left: 0;
+    width: 100vw;
+    height: 44%; /* Modal takes up 44% of the screen height */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top of the modal */
+    z-index: 1000;
+    transition: bottom 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth slide-up easing */
+}
+
+.modal.show {
+    bottom: 0; /* Bring the modal to the bottom of the screen */
+}
+
+/* Modal Content Styles */
+.modal-content {
+    background-color: #2b2b2b;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+    opacity: 0; /* Initially invisible */
+    transform: translateY(30px); /* Start from slightly below */
+    transition: opacity 0.6s ease-in-out, transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth fade and slide-up effect */
+}
+
+.modal.show .modal-content {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Slide to the original position */
+}
+
+/* Close Button Styles */
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #e91e63;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+}
+
+/* Modal Option Styles */
+.modal-option {
+    align-items: center; /* Vertically align icon and text */
+    margin: 20px 0;
+    background-color: #333;
+    padding: 15px;
+    border-radius: 8px;
+    opacity: 0; /* Initially invisible */
+    transform: translateY(20px); /* Slight offset for animation */
+    transition: opacity 2s ease-in-out, transform 1.2s ease-in-out; /* Smooth fade-in and slide-up */
+    transition-delay: 0.4s; /* Delay for staggered animation */
+}
+
+.modal-option.show {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Slide to original position */
+}
+
+/* Icon Styles */
+.modal-icon {
+    font-size: 2rem;
+    margin-right: 15px; /* Space between icon and text */
+    color: #e91e63;
+}
+
+/* Text and Span Styles */
+.modal-option p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0; /* Remove margin to keep the layout tight */
+}
+
+.modal-option span {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin-top: 8px; /* Space between p and span */
+    display: block; /* Ensure span appears on a new line below p */
+}
