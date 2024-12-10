@@ -1,0 +1,125 @@
+/* General Container */
+.homepage-container {
+    background-color: #1d1d1d; /* Black background */
+    color: #fff;
+    font-family: "Arial", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #333;
+  }
+  
+  .navbar-title {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  .navbar-icons .icon {
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    color: #e91e63; /* Dark pink */
+  }
+  
+  /* Horizontal Date Scroll */
+  .date-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem;
+    background-color: #2b2b2b; /* Darker black */
+  }
+  
+  .date-item {
+    flex: 0 0 60px;
+    text-align: center;
+    padding: 0.5rem;
+    color: #aaa;
+  }
+  
+  .date-item.active-date {
+    background-color: #e91e63;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+  /* Center Content */
+  .center-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #aaa;
+  }
+  
+  .calendar-icon {
+    position: relative;
+  }
+  
+  .big-icon {
+    font-size: 5rem;
+    color: #e91e63; /* Dark pink */
+  }
+  
+  .add-icon {
+    position: absolute;
+    bottom: 5px;
+    right: -5px;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0.3rem;
+  }
+  
+  /* Floating Action Button */
+  .fab {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #e91e63;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .fab:hover {
+    background-color: #d81b60;
+  }
+  
+  /* Bottom Navbar */
+  .bottom-navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8rem 0;
+    background-color: #2b2b2b; /* Dark black */
+    border-top: 1px solid #333;
+  }
+  
+  .nav-item {
+    text-align: center;
+    color: #aaa;
+  }
+  
+  .nav-item.active {
+    color: #e91e63; /* Dark pink */
+  }
+  
+  .nav-item .icon {
+    font-size: 1.2rem;
+  }
+  
