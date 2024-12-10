@@ -10,12 +10,12 @@ import {
   FaSyncAlt,
   FaTrophy,
 } from "react-icons/fa";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState("Tue");
-  const [isModalOpen, setIsModalOpen] = useState(false); // To control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dates = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
 
@@ -24,17 +24,23 @@ const HomePage = () => {
   };
 
   const handlePlusClick = () => {
-    setIsModalOpen(true); // Open the modal on plus icon click
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
   };
-
+  
   const navigate = useNavigate();
 
   const handleTaskNavigation = () => {
     navigate("/task");
+  };
+
+
+  
+  const handleRecurringNavigation = () => {
+    navigate("/recurringTask");
   };
 
   return (
@@ -82,7 +88,7 @@ const HomePage = () => {
         <FaPlus className="Plus" />
       </button>
 
-      {/* Modal for Task, Recurring Task, Habit */}
+      {/* Modal */}
       {isModalOpen && (
         <div className={`modal ${isModalOpen ? "show" : ""}`}>
           <div className="modal-content">
@@ -90,7 +96,7 @@ const HomePage = () => {
               X
             </button>
 
-            <div className={`modal-option ${isModalOpen ? "show" : ""}`}>
+            <div className="modal-option show">
               <div className="d-flex" style={{ display: "flex" }}>
                 <FaTrophy className="modal-icon" />
                 <p>Habit</p>
@@ -101,7 +107,9 @@ const HomePage = () => {
               </span>
             </div>
 
-            <div className={`modal-option ${isModalOpen ? "show" : ""}`}>
+            <div className="modal-option show"  onClick={() => {
+                handleRecurringNavigation();
+              }}>
               <div className="d-flex" style={{ display: "flex" }}>
                 <FaSyncAlt className="modal-icon" />
                 <p>Recurring Task</p>
@@ -112,46 +120,64 @@ const HomePage = () => {
             </div>
 
             <div
-              className={`modal-option ${isModalOpen ? "show" : ""}`}
+              className="modal-option show"
               onClick={() => {
                 handleTaskNavigation();
-                console.log("Navigating to Task Page");
               }}
             >
-               <div className="d-flex" style={{ display: "flex" }}
-  >
+              <div className="d-flex" style={{ display: "flex" }}>
                 <FaCheckCircle className="modal-icon" />
                 <p>Task</p>
-                </div>
-            <span>Single instance activity without tracking over time.</span>
               </div>
+              <span>Single instance activity without tracking over time.</span>
             </div>
           </div>
-        
+        </div>
       )}
 
       {/* Bottom Navbar */}
       <div className="bottom-navbar">
-        <div className="nav-item active">
-          <NavLink to="/home" className={({ isActive }) => (isActive ? "active" : "")}>
+        <div className="nav-item">
+          <NavLink
+            to="/home"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <FaHome className="icon" />
             <p>Today</p>
           </NavLink>
         </div>
         <div className="nav-item">
-          <NavLink to="/habit" className={({ isActive }) => (isActive ? "active" : "")}>
+          <NavLink
+            to="/habit"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <FaTasks className="icon" />
             <p>Habits</p>
           </NavLink>
         </div>
         <div className="nav-item">
-          <NavLink to="/categories" className={({ isActive }) => (isActive ? "active" : "")}>
+          <NavLink
+            to="/task"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            <FaCheckCircle className="icon" />
+            <p>Task</p>
+          </NavLink>
+        </div>
+        <div className="nav-item">
+          <NavLink
+            to="/categories"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <FaList className="icon" />
             <p>Categories</p>
           </NavLink>
         </div>
         <div className="nav-item">
-          <NavLink to="/timer" className={({ isActive }) => (isActive ? "active" : "")}>
+          <NavLink
+            to="/timer"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             <FaStopwatch className="icon" />
             <p>Timer</p>
           </NavLink>
