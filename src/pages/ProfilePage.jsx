@@ -29,7 +29,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-container">
+    <div className="profile-container" style={{ padding:"55px", }}>
       <h1 className="profile-heading">Edit Profile</h1>
       <div className="profile-picture-container">
         <img

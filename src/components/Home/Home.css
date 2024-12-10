@@ -1,17 +1,29 @@
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+  }
+
 /* General Container */
 .homepage-container {
+    width: 100%;
     background-color: #1d1d1d; /* Black background */
     color: #fff;
     font-family: "Arial", sans-serif;
-    height: 100vh;
+    min-height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    padding: 1rem; /* Padding for the container */
+    box-sizing: border-box; /* Include padding in the element's width and height */
   }
   
   /* Navbar */
   .navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     border-bottom: 1px solid #333;
   }
@@ -21,10 +33,16 @@
     color: #fff;
   }
   
+  .navbar-icons {
+    display: flex;
+    align-items: center;
+  }
+  
   .navbar-icons .icon {
     font-size: 1.2rem;
     margin-left: 1rem;
     color: #e91e63; /* Dark pink */
+    cursor: pointer;
   }
   
   /* Horizontal Date Scroll */
@@ -33,6 +51,11 @@
     overflow-x: auto;
     padding: 0.5rem;
     background-color: #2b2b2b; /* Darker black */
+    scrollbar-width: none; /* For modern browsers */
+  }
+  
+  .date-scroll::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
   }
   
   .date-item {
@@ -40,6 +63,7 @@
     text-align: center;
     padding: 0.5rem;
     color: #aaa;
+    cursor: pointer;
   }
   
   .date-item.active-date {
@@ -57,6 +81,7 @@
     align-items: center;
     text-align: center;
     color: #aaa;
+    min-height: 60vh; /* Ensure this section takes up significant height */
   }
   
   .calendar-icon {
@@ -64,7 +89,7 @@
   }
   
   .big-icon {
-    font-size: 5rem;
+    font-size: 5rem; /* Larger icon size */
     color: #e91e63; /* Dark pink */
   }
   
@@ -95,6 +120,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 10;
   }
   
   .fab:hover {
@@ -105,14 +131,18 @@
   .bottom-navbar {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 0.8rem 0;
     background-color: #2b2b2b; /* Dark black */
     border-top: 1px solid #333;
+    width: 100%; /* Ensure full-width navbar */
   }
   
   .nav-item {
     text-align: center;
     color: #aaa;
+    font-size: 0.9rem;
+    cursor: pointer;
   }
   
   .nav-item.active {
@@ -121,5 +151,39 @@
   
   .nav-item .icon {
     font-size: 1.2rem;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .navbar-title {
+      font-size: 1.2rem;
+    }
+  
+    .big-icon {
+      font-size: 4rem; /* Slightly smaller icon for smaller screens */
+    }
+  
+    .fab {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+  
+    .center-content {
+      min-height: 50vh; /* Adjust height for smaller screens */
+    }
+  
+    .date-scroll {
+      padding: 0.3rem; /* Less padding on smaller screens */
+    }
+  
+    .date-item {
+      flex: 0 0 50px; /* Smaller date items */
+      font-size: 0.8rem; /* Smaller font size */
+    }
+  
+    .bottom-navbar {
+      padding: 0.6rem 0;
+    }
   }
   

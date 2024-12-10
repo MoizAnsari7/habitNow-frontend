@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion"; // Import Framer Motion
 import Sidenav from "./components/Sidenav/Sidenav"; // Import the Sidenav component
+import HomePage from "./components/Home/HomePage";
 
 // Lazy load components for better performance
 const HabitsPage = lazy(() => import("./pages/HabitPage"));
@@ -31,7 +32,7 @@ function App() {
     <Router>
       <div style={{ display: "flex" }}>
         <Sidenav />
-        <div style={{  padding: "25px", width: "80%" }}>
+        <div style={{ width: "100%" }}>
           <Suspense fallback={<div className="loading">Loading...</div>}>
             <Routes>
               <Route
@@ -43,7 +44,7 @@ function App() {
                     animate="animate"
                     exit="exit"
                   >
-                    <HabitsPage />
+                    <HomePage />
                   </motion.div>
                 }
               />
@@ -70,6 +71,20 @@ function App() {
                     exit="exit"
                   >
                     <TimerPage />
+                  </motion.div>
+                }
+              />
+
+<Route
+                path="/habit"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <HabitsPage />
                   </motion.div>
                 }
               />
