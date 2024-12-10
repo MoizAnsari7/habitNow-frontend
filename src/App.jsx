@@ -7,8 +7,9 @@ import HomePage from "./components/Home/HomePage";
 // Lazy load components for better performance
 const HabitsPage = lazy(() => import("./pages/HabitPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
-const SettingPage = lazy(() => import("./pages/SettingPage"));
+// const SettingPage = lazy(() => import("./pages/SettingPage"));
 const TimerPage = lazy(() => import("./pages/TimerPage"));
+const TaskPage = lazy(() => import("./pages/TaskPage"));
 
 const pageVariants = {
   initial: {
@@ -84,10 +85,22 @@ function App() {
                     animate="animate"
                     exit="exit"
                   >
-                    <HabitsPage />
+                   <HabitsPage />
                   </motion.div>
                 }
               />
+
+<Route path="/task" element={ <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                   <TaskPage />
+                  </motion.div>
+                }
+              />
+
             </Routes>
           </Suspense>
         </div>
