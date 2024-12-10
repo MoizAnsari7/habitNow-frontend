@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion"; // Import Framer Motion
-import Sidenav from "./components/Sidenav"; // Import the Sidenav component
+import Sidenav from "./components/Sidenav/Sidenav"; // Import the Sidenav component
 
 // Lazy load components for better performance
 const HabitsPage = lazy(() => import("./pages/HabitPage"));
@@ -35,7 +35,7 @@ function App() {
           <Suspense fallback={<div className="loading">Loading...</div>}>
             <Routes>
               <Route
-                path="/habit"
+                path="/"
                 element={
                   <motion.div
                     variants={pageVariants}
