@@ -1,23 +1,80 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidenav from './components/Sidenav'; // Import the Sidenav component
-import HabitsPage from './pages/HabitPage';
-import ProfilePage from './pages/ProfilePage';
-import SettingsPage from './pages/SettingPage';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { motion } from "framer-motion"; // Import Framer Motion
+import Sidenav from "./components/Sidenav"; // Import the Sidenav component
 
+// Lazy load components for better performance
+const HabitsPage = lazy(() => import("./pages/HabitPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const SettingPage = lazy(() => import("./pages/SettingPage"));
+const TimerPage = lazy(() => import("./pages/TimerPage"));
+
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 30,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+  exit: {
+    opacity: 0,
+    y: -30,
+    transition: { duration: 0.5 },
+  },
+};
 
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: "flex" }}>
         <Sidenav />
-        <div style={{ marginLeft: '250px', padding: '20px', width: '100%' }}>
-          <Routes>
-            <Route path="/home" element={<  HabitsPage />} />
-            <Route path="/timer" element={< ProfilePage />} />
-            <Route path="/timer" element={< SettingsPage  />} />
-            {/* Add routes for other pages here */}
-          </Routes>
+        <div style={{  padding: "25px", width: "80%" }}>
+          <Suspense fallback={<div className="loading">Loading...</div>}>
+            <Routes>
+              <Route
+                path="/habit"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <HabitsPage />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <ProfilePage />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/timer"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <TimerPage />
+                  </motion.div>
+                }
+              />
+            </Routes>
+          </Suspense>
         </div>
       </div>
     </Router>

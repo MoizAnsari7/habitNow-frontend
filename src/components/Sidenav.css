@@ -55,14 +55,14 @@
   
   .toggle-btn {
     position: absolute;
-    top: 20px;
+    top: 40px;
     left: 20px;
     background-color: #e91e63;
     border: none;
     padding: 10px;
     border-radius: 5px;
     color: white;
-    font-size: 24px;
+    font-size: 10px;
     cursor: pointer;
     z-index: 10;
   }
@@ -76,4 +76,38 @@
       display: block;
     }
   }
-  
+  /* Sidenav Styling */
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px; /* Adjust based on your design */
+  background-color: #333;
+  color: white;
+  padding-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidenav.closed {
+  transform: translateX(-250px); /* Hide sidenav */
+}
+
+.sidenav.open {
+  transform: translateX(0); /* Show sidenav */
+}
+
+.sidenav-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.sidenav-toggle:hover {
+  background-color: #555;
+}
