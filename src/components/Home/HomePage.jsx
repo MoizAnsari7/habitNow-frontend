@@ -1,27 +1,36 @@
-import React from "react";
-import "./HomePage.css";
-import { FaSearch, FaFilter, FaCalendarAlt, FaQuestionCircle, FaPlus } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaCalendarAlt, FaPlus, FaHome, FaTasks, FaList, FaStopwatch } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
+import "./Home.css";
 
 const HomePage = () => {
+  const [selectedDate, setSelectedDate] = useState("Tue");
+
+  const dates = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
-    <div className="homepage-container">
-      {/* Top Navbar */}
+    <div className="homepage-container" style={{width: "100vw", padding:0, marginTop:"20px" }}>
+      {/* Navbar */}
       <div className="navbar">
-        <h2 className="navbar-title">Today</h2>
+        <span className="navbar-title" style={{visibility:"hidden" }}>HabitNow</span>
         <div className="navbar-icons">
-          <FaSearch className="icon" />
-          <FaFilter className="icon" />
           <FaCalendarAlt className="icon" />
-          <FaQuestionCircle className="icon" />
         </div>
       </div>
 
-      {/* Horizontal Date Scroll */}
+      {/* Date Scroll */}
       <div className="date-scroll">
-        {["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-          <div key={index} className={`date-item ${index === 4 ? "active-date" : ""}`}>
-            <span>{day}</span>
-            <span>{6 + index}</span>
+        {dates.map((date, index) => (
+          <div
+            key={index}
+            className={`date-item ${selectedDate === date ? "active-date" : ""}`}
+            onClick={() => handleDateClick(date)}
+          >
+            {date}
           </div>
         ))}
       </div>
@@ -30,12 +39,10 @@ const HomePage = () => {
       <div className="center-content">
         <div className="calendar-icon">
           <FaCalendarAlt className="big-icon" />
-          <div className="add-icon">
-            <FaPlus />
-          </div>
+          <FaPlus className="add-icon" />
         </div>
-        <p className="center-text">There is nothing scheduled</p>
-        <p className="sub-text">Try adding new activities</p>
+        <p>There is nothing scheduled</p>
+        <span>Try adding new activities</span>
       </div>
 
       {/* Floating Action Button */}
@@ -43,27 +50,31 @@ const HomePage = () => {
         <FaPlus />
       </button>
 
-      {/* Bottom Navigation Bar */}
+      {/* Bottom Navbar */}
       <div className="bottom-navbar">
         <div className="nav-item active">
-          <FaCalendarAlt className="icon" />
-          <span>Today</span>
+        <NavLink to="/home" activeClassName="active">
+          <FaHome className="icon" />
+          <p>Today</p>
+          </NavLink>
         </div>
         <div className="nav-item">
-          <FaSearch className="icon" />
-          <span>Habits</span>
+        <NavLink to="/habit" activeClassName="active">
+          <FaTasks className="icon" />
+          <p>Habits</p>
+          </NavLink>
         </div>
         <div className="nav-item">
-          <FaFilter className="icon" />
-          <span>Tasks</span>
+        <NavLink to="/categories" activeClassName="active">
+           <FaList className="icon" />
+          <p>Categories</p>
+          </NavLink>
         </div>
         <div className="nav-item">
-          <FaCalendarAlt className="icon" />
-          <span>Categories</span>
-        </div>
-        <div className="nav-item">
-          <FaQuestionCircle className="icon" />
-          <span>Timer</span>
+        <NavLink to="/timer" activeClassName="active">
+          <FaStopwatch className="icon" />
+          <p>Timer</p>
+          </NavLink>
         </div>
       </div>
     </div>
