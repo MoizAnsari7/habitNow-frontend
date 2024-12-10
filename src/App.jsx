@@ -10,6 +10,7 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 // const SettingPage = lazy(() => import("./pages/SettingPage"));
 const TimerPage = lazy(() => import("./pages/TimerPage"));
 const TaskPage = lazy(() => import("./pages/TaskPage"));
+const RecurringTaskPage = lazy(() => import("./pages/RecurringTask/RecurringTaskPage"));
 
 const pageVariants = {
   initial: {
@@ -97,6 +98,17 @@ function App() {
                     exit="exit"
                   >
                    <TaskPage />
+                  </motion.div>
+                }
+              />
+
+<Route path="/recurringTask" element={ <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                   < RecurringTaskPage />
                   </motion.div>
                 }
               />

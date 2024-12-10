@@ -291,3 +291,27 @@ body {
     margin-top: 8px; /* Space between p and span */
     display: block; /* Ensure span appears on a new line below p */
 }
+/* Remove blue link color */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Active state styling */
+.nav-item .active {
+  color: #e91e63; /* Highlight active link */
+}
+
+/* Fix icons not aligning properly */
+.nav-item .icon {
+  font-size: 1.5rem;
+}
+
+/* Fix active state text and icon styles */
+.nav-item.active p {
+  font-weight: bold;
+}
+
+.nav-item.active .icon {
+  color: #e91e63;
+}
