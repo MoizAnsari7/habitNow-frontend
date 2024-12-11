@@ -35,6 +35,12 @@ body {
   background-color: #333333;
 }
 
+.main-div {
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  display: flex !important;
+}
 /* Make layout responsive */
 @media (max-width: 768px) {
   .sidenav {

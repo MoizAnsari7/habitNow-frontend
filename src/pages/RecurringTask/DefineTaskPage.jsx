@@ -15,7 +15,7 @@ const DefineTaskPage = ({ onNext, onPrevious }) => {
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Define Your Task</h2>
-      
+
       <input
         type="text"
         placeholder="Enter Task Name"
@@ -23,15 +23,15 @@ const DefineTaskPage = ({ onNext, onPrevious }) => {
         onChange={(e) => setTaskName(e.target.value)}
         style={styles.input}
       />
-      
+
       <textarea
         placeholder="Add a Note (Optional)"
         value={taskNote}
         onChange={(e) => setTaskNote(e.target.value)}
         style={styles.textarea}
       ></textarea>
-      
-      <div style={styles.buttonContainer}>
+
+      <div style={styles.footer}>
         <button style={styles.backButton} onClick={onPrevious}>
           Back
         </button>
@@ -45,53 +45,55 @@ const DefineTaskPage = ({ onNext, onPrevious }) => {
 
 const styles = {
   container: {
-    height: "60vh",
     width: "90vw",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
+    height: "80vh",
     backgroundColor: "#000",
     color: "#fff",
     padding: "20px",
   },
   heading: {
-    fontSize: "20px",
-    marginBottom: "20px",
-    color: "#ff4081",
+    fontSize: "24px",
+    color: "#ff4d6d",
+    marginBottom: "30px",
   },
   input: {
-    width: "90%",
+    width: "100%",
+    maxWidth: "400px",
     padding: "10px",
-    marginBottom: "15px",
-    border: "1px solid #ff4081",
+    marginBottom: "20px",
+    border: "1px solid #ff4d6d",
     borderRadius: "5px",
-    backgroundColor: "#222",
+    backgroundColor: "#1c1c1e",
     color: "#fff",
     fontSize: "16px",
   },
   textarea: {
-    width: "90%",
-    height: "80px",
+    width: "100%",
+    maxWidth: "400px",
+    height: "100px",
     padding: "10px",
-    border: "1px solid #ff4081",
+    border: "1px solid #ff4d6d",
     borderRadius: "5px",
-    backgroundColor: "#222",
+    backgroundColor: "#1c1c1e",
     color: "#fff",
     fontSize: "16px",
-    marginBottom: "20px",
+    marginBottom: "400px",
   },
-  buttonContainer: {
-    marginTop:"30vh",
+  footer: {
     display: "flex",
     justifyContent: "space-between",
-    width: "90%",
+    width: "100%",
+    maxWidth: "400px",
+    marginTop: "20px",
   },
   backButton: {
     flex: 1,
     padding: "10px",
-    backgroundColor: "#555",
+    backgroundColor: "#333",
     color: "#fff",
     border: "none",
     borderRadius: "5px",
@@ -101,7 +103,7 @@ const styles = {
   saveButton: {
     flex: 1,
     padding: "10px",
-    backgroundColor: "#d32f2f",
+    backgroundColor: "#ff4d6d",
     color: "#fff",
     border: "none",
     borderRadius: "5px",

@@ -42,7 +42,7 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="timer-page"  style={{ padding:"25px", }}>
+    <div className="timer-page"  >
       {/* Header */}
       <div className="header">
         <h2>Timer</h2>

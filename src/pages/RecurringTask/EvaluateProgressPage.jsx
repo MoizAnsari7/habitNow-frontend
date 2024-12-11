@@ -4,80 +4,86 @@ const EvaluateProgressPage = ({ onPrevious, onNext }) => {
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>How do you want to evaluate your progress?</h2>
-      <button style={styles.buttonYesNo} >
-        WITH A YES OR NO
-      </button>
-      <button style={styles.buttonChecklist} disabled>
+
+      <button style={styles.primaryButton}>WITH A YES OR NO</button>
+      <button style={styles.secondaryButton} disabled>
         WITH A CHECKLIST (Premium Feature)
       </button>
 
-
-      
-<div className="d-flex" style={{ display: "flex", margin: "20px", padding: "25px"}}>
-
-<button style={styles.backButton} onClick={onPrevious}>
-  Back
-</button>
-
-<button style={styles.nextButton} onClick={onNext}>
-  Next
-</button>
-
-</div>
+      <div style={styles.footer}>
+        <button style={styles.backButton} onClick={onPrevious}>
+          Back
+        </button>
+        <button style={styles.nextButton} onClick={onNext}>
+          Next
+        </button>
+      </div>
     </div>
   );
 };
 
 const styles = {
   container: {
-    width: "100vw",
+    width : "90vw",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
+    height: "80vh",
     backgroundColor: "#000",
     color: "#fff",
+    padding: "20px",
   },
   heading: {
-    fontSize: "18px",
-    marginBottom: "20px",
+    fontSize: "24px",
+    color: "#ff4d6d",
+    marginBottom: "30px",
+    textAlign: "center",
   },
-  buttonYesNo: {
-    width: "80%",
-    padding: "10px",
-    backgroundColor: "#d32f2f",
+  primaryButton: {
+    width: "100%",
+    maxWidth: "400px",
+    padding: "15px",
+    marginBottom: "20px",
+    backgroundColor: "#ff4d6d",
     color: "#fff",
     border: "none",
     borderRadius: "5px",
-    marginBottom: "10px",
     cursor: "pointer",
+    fontSize: "16px",
   },
-  buttonChecklist: {
-    width: "80%",
-    padding: "10px",
+  secondaryButton: {
+    width: "100%",
+    maxWidth: "400px",
+    padding: "15px",
+    marginBottom: "420px",
     backgroundColor: "#555",
     color: "#fff",
     border: "none",
     borderRadius: "5px",
     cursor: "not-allowed",
+    fontSize: "16px",
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    maxWidth: "400px",
   },
   backButton: {
-    width: "80%",
+    flex: 1,
     padding: "10px",
-    backgroundColor: "#555",
+    backgroundColor: "#333",
     color: "#fff",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-    marginRight : "40px",
+    marginRight: "10px",
   },
-
   nextButton: {
-    marginLeft : "40px",
-    width: "80%",
+    flex: 1,
     padding: "10px",
-    backgroundColor: "#e91e63",
+    backgroundColor: "#ff4d6d",
     color: "#fff",
     border: "none",
     borderRadius: "5px",

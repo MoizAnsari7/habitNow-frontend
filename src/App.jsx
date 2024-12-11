@@ -11,6 +11,7 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const TimerPage = lazy(() => import("./pages/TimerPage"));
 const TaskPage = lazy(() => import("./pages/TaskPage"));
 const RecurringTaskPage = lazy(() => import("./pages/RecurringTask/RecurringTaskPage"));
+const MyTaskPage = lazy(() => import("./pages/MyTaskPage"));
 
 const pageVariants = {
   initial: {
@@ -32,9 +33,9 @@ const pageVariants = {
 function App() {
   return (
     <Router>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" , width : "100%" , justifyContent: "center" , alignItems: "center" }}>
         <Sidenav />
-        <div style={{ width: "100%" }}>
+        <div style={{ display: "flex" , width : "100%" , justifyContent: "center" , alignItems: "center" }}>
           <Suspense fallback={<div className="loading">Loading...</div>}>
             <Routes>
               <Route
@@ -68,6 +69,7 @@ function App() {
                 element={
                   <motion.div
                     variants={pageVariants}
+                    style={{ display: "flex" , width : "100%" , justifyContent: "center" , alignItems: "center"}}
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -98,6 +100,18 @@ function App() {
                     exit="exit"
                   >
                    <TaskPage />
+                  </motion.div>
+                }
+              />
+
+
+<Route path="/myTask" element={ <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                   <MyTaskPage />
                   </motion.div>
                 }
               />
