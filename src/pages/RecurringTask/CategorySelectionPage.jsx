@@ -19,27 +19,25 @@ const CategorySelectionPage = ({ onNext, onPrevious }) => {
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Select a Category</h2>
+
       <div style={styles.grid}>
         {categories.map((category, index) => (
           <button
             key={index}
             style={{ ...styles.categoryButton, backgroundColor: category.color }}
-             >
+          >
             {category.name}
           </button>
         ))}
       </div>
 
-<div className="d-flex" style={{ display: "flex", margin: "10px"}}>
-
-      <button style={styles.backButton} onClick={onPrevious}>
-        Back
-      </button>
-
-      <button style={styles.nextButton} onClick={onNext}>
-        Next
-      </button>
-
+      <div style={styles.footer}>
+        <button style={styles.backButton} onClick={onPrevious}>
+          Back
+        </button>
+        <button style={styles.nextButton} onClick={onNext}>
+          Next
+        </button>
       </div>
     </div>
   );
@@ -47,25 +45,28 @@ const CategorySelectionPage = ({ onNext, onPrevious }) => {
 
 const styles = {
   container: {
-    width: "100vw",
+    width: "90vw",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
+    height: "80vh",
     backgroundColor: "#000",
     color: "#fff",
+    padding: "20px",
   },
   heading: {
-    fontSize: "18px",
-    marginBottom: "20px",
+    fontSize: "24px",
+    color: "#ff4d6d",
+    marginBottom: "30px",
+    textAlign: "center",
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "10px",
-    width: "90%",
-    marginBottom: "20px",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gap: "15px",
+    width: "100%",
+    maxWidth: "400px",
   },
   categoryButton: {
     padding: "10px",
@@ -73,23 +74,30 @@ const styles = {
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
+    fontSize: "14px",
+    textAlign: "center",
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    maxWidth: "400px",
+    marginTop: "20px",
   },
   backButton: {
-    width: "80%",
+    flex: 1,
     padding: "10px",
-    backgroundColor: "#555",
+    backgroundColor: "#333",
     color: "#fff",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-    marginRight : "40px",
+    marginRight: "10px",
   },
-
   nextButton: {
-    marginLeft : "40px",
-    width: "80%",
+    flex: 1,
     padding: "10px",
-    backgroundColor: "#e91e63",
+    backgroundColor: "#ff4d6d",
     color: "#fff",
     border: "none",
     borderRadius: "5px",

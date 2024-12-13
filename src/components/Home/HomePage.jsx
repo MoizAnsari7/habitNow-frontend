@@ -83,6 +83,7 @@ const HomePage = () => {
         <span>Try adding new activities</span>
       </div>
 
+
       {/* Floating Action Button */}
       <button className="fab" onClick={handlePlusClick}>
         <FaPlus className="Plus" />
@@ -157,7 +158,7 @@ const HomePage = () => {
         </div>
         <div className="nav-item">
           <NavLink
-            to="/task"
+            to="/myTask"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             <FaCheckCircle className="icon" />
