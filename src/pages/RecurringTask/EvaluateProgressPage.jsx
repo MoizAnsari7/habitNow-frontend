@@ -1,23 +1,21 @@
 import React from "react";
 
-const EvaluateProgressPage = ({ onPrevious, onNext }) => {
+const EvaluateProgressPage = ({ onPrevious, onNext,setValue }) => {
+
+  const handleChange = (evaluationType) => {
+    setValue(evaluationType);
+};
+
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>How do you want to evaluate your progress?</h2>
 
-      <button style={styles.primaryButton}>WITH A YES OR NO</button>
+      <button style={styles.primaryButton} onClick={() =>{onNext(), handleChange("WITH A YES OR NO")}}>WITH A YES OR NO</button>
       <button style={styles.secondaryButton} disabled>
         WITH A CHECKLIST (Premium Feature)
       </button>
 
-      <div style={styles.footer}>
-        <button style={styles.backButton} onClick={onPrevious}>
-          Back
-        </button>
-        <button style={styles.nextButton} onClick={onNext}>
-          Next
-        </button>
-      </div>
+     
     </div>
   );
 };
@@ -29,8 +27,8 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "80vh",
-    backgroundColor: "#000",
+    height: "70vh",
+    backgroundColor: "#1d1d1d",
     color: "#fff",
     padding: "20px",
   },

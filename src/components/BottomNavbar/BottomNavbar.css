@@ -1,12 +1,17 @@
 
+body {
+    background-color: #1d1d1d;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+  }
 
 /* General Container */
 .homepage-container {
     width: 100%;
-    background-color: #242424; /* Black background */
+    background-color: #1d1d1d; /* Black background */
     color: #fff;
     font-family: "Arial", sans-serif;
-    min-height: 85vh !important; /* Full viewport height */
+    min-height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
     overflow-x: hidden; /* Prevent horizontal scroll */
@@ -45,7 +50,7 @@
     display: flex;
     overflow-x: auto;
     padding: 0.5rem;
-    background-color: #242424; /* Darker black */
+    background-color: #2b2b2b; /* Darker black */
     scrollbar-width: none; /* For modern browsers */
   }
   
@@ -124,13 +129,16 @@
   
   /* Bottom Navbar */
   .bottom-navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.8rem 0;
-    background-color: #2b2b2b; /* Dark black */
-    border-top: 1px solid #333;
-    width: 100%; /* Ensure full-width navbar */
+    position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
   }
   
   .nav-item {
@@ -309,41 +317,4 @@ a {
 
 .nav-item.active .icon {
   color: #e91e63;
-}
-
-
-.calendar-icon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers the content horizontally */
-  justify-content: center; /* Centers the content vertically */
-  text-align: center; /* Centers text */
-  margin-top: 20px; /* Add space at the top */
-}
-
-.calendar-icon {
-  display: flex;
-  align-items: center; /* Vertically center the icons */
-  justify-content: center;
-  margin-bottom: 10px; /* Space between icons and text */
-}
-
-.big-icon {
-  font-size: 50px; /* Adjust size of calendar icon */
-  margin-right: 10px; /* Space between the two icons */
-}
-
-.add-icon {
-  font-size: 30px; /* Adjust size of the plus icon */
-  color: #4caf50; /* Color for the plus icon */
-}
-
-.message p {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.message span {
-  font-size: 14px;
-  color: #888; /* Lighter color for the secondary text */
 }

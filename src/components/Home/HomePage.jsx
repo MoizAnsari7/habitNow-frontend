@@ -12,8 +12,12 @@ import {
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Home.css";
+import MyTaskPage from "../../pages/MyTaskPage";
+import { useTaskContext } from "../../context/TaskProvider";
 
 const HomePage = () => {
+  const { tasks, setTasks } = useTaskContext();
+
   const [selectedDate, setSelectedDate] = useState("Tue");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,15 +34,13 @@ const HomePage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  
+
   const navigate = useNavigate();
 
   const handleTaskNavigation = () => {
     navigate("/task");
   };
 
-
-  
   const handleRecurringNavigation = () => {
     navigate("/recurringTask");
   };
@@ -73,16 +75,29 @@ const HomePage = () => {
         ))}
       </div>
 
-      {/* Center Content */}
-      <div className="center-content">
-        <div className="calendar-icon">
-          <FaCalendarAlt className="big-icon" />
-          <FaPlus className="add-icon" />
+      {!tasks || tasks.length === 0 ? (
+        <>
+          <div className="calendar-icon-container">
+            <div className="calendar-icon">
+              <FaCalendarAlt className="big-icon" />
+              <FaPlus className="add-icon" />
+            </div>
+            <div className="message">
+              <p>There is nothing scheduled</p>
+              <span>Try adding new activities</span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div>
+          <h2>Your Tasks</h2>
+          <ul>
+            {tasks.map((task, index) => (
+              <li key={index}>{typeof task === "string" ? task : task.name}</li>
+            ))}
+          </ul>
         </div>
-        <p>There is nothing scheduled</p>
-        <span>Try adding new activities</span>
-      </div>
-
+      )}
 
       {/* Floating Action Button */}
       <button className="fab" onClick={handlePlusClick}>
@@ -108,9 +123,12 @@ const HomePage = () => {
               </span>
             </div>
 
-            <div className="modal-option show"  onClick={() => {
+            <div
+              className="modal-option show"
+              onClick={() => {
                 handleRecurringNavigation();
-              }}>
+              }}
+            >
               <div className="d-flex" style={{ display: "flex" }}>
                 <FaSyncAlt className="modal-icon" />
                 <p>Recurring Task</p>
@@ -135,55 +153,6 @@ const HomePage = () => {
           </div>
         </div>
       )}
-
-      {/* Bottom Navbar */}
-      <div className="bottom-navbar">
-        <div className="nav-item">
-          <NavLink
-            to="/home"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            <FaHome className="icon" />
-            <p>Today</p>
-          </NavLink>
-        </div>
-        <div className="nav-item">
-          <NavLink
-            to="/habit"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            <FaTasks className="icon" />
-            <p>Habits</p>
-          </NavLink>
-        </div>
-        <div className="nav-item">
-          <NavLink
-            to="/myTask"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            <FaCheckCircle className="icon" />
-            <p>Task</p>
-          </NavLink>
-        </div>
-        <div className="nav-item">
-          <NavLink
-            to="/categories"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            <FaList className="icon" />
-            <p>Categories</p>
-          </NavLink>
-        </div>
-        <div className="nav-item">
-          <NavLink
-            to="/timer"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            <FaStopwatch className="icon" />
-            <p>Timer</p>
-          </NavLink>
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-const HowOftenPage = ({ onPrevious, onNext }) => {
+const HowOftenPage = ({ onPrevious, onNext, setValue }) => {
   const [selectedOption, setSelectedOption] = useState("Every day");
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleChange = (event) => {
+      setSelectedOption(event.target.value);
+      setValue(event.target.value); // Pass selected value to parent state
   };
 
   return (
@@ -18,7 +19,7 @@ const HowOftenPage = ({ onPrevious, onNext }) => {
               name="frequency"
               value={option}
               checked={selectedOption === option}
-              onChange={handleOptionChange}
+              onChange={handleChange}
               style={styles.radioInput}
             />
             {option}
@@ -45,8 +46,8 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "80vh",
-    backgroundColor: "#000",
+    height: "70vh",
+    backgroundColor: "#1d1d1d",
     color: "#fff",
     padding: "20px",
   },

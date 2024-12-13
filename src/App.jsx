@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion"; // Import Framer Motion
 import Sidenav from "./components/Sidenav/Sidenav"; // Import the Sidenav component
 import HomePage from "./components/Home/HomePage";
+import BottomNavbarPage from "./components/BottomNavbar/BottomNavbarPage";
 
 // Lazy load components for better performance
 const HabitsPage = lazy(() => import("./pages/HabitPage"));
@@ -33,7 +34,7 @@ const pageVariants = {
 function App() {
   return (
     <Router>
-      <div style={{ display: "flex" , width : "100%" , justifyContent: "center" , alignItems: "center" }}>
+      <div className="MainDiv" style={{ position: "relative" }}>
         <Sidenav />
         <div style={{ display: "flex" , width : "100%" , justifyContent: "center" , alignItems: "center" }}>
           <Suspense fallback={<div className="loading">Loading...</div>}>
@@ -129,7 +130,10 @@ function App() {
 
             </Routes>
           </Suspense>
+        
         </div>
+      {/* Bottom Navbar */}
+     <BottomNavbarPage />
       </div>
     </Router>
   );

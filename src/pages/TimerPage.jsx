@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Timer.css";
 
 const TimerPage = () => {
-  const [isCountdown, setIsCountdown] = useState(false);
   const [time, setTime] = useState(0); // Time in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [tab, setTab] = useState("stopwatch"); // Active tab: stopwatch, countdown, intervals
   const [records, setRecords] = useState([]); // Store lap/last record
+  const [selectedSound, setSelectedSound] = useState("default-alarm"); // Default alarm sound
+  const alarmAudioRef = useRef(null);
+
+  // Predefined sounds
+  const sounds = [
+    { id: "default-alarm", label: "Default Alarm", src: "/sounds/default-alarm.mp3" },
+    { id: "chime", label: "Chime", src: "/sounds/chime.mp3" },
+    { id: "beep", label: "Beep", src: "/sounds/beep-01a.wav" },
+  ];
 
   // Timer logic
   useEffect(() => {
@@ -20,18 +28,46 @@ const TimerPage = () => {
     } else {
       clearInterval(timer);
     }
+
+    if (tab === "countdown" && time === 0 && isRunning) {
+      handleAlarm(); // Trigger alarm when countdown reaches zero
+      setIsRunning(false); // Stop the timer
+    }
+
     return () => clearInterval(timer);
   }, [isRunning, time, tab]);
+
+  // Handle alarm
+  const handleAlarm = () => {
+    const sound = sounds.find((s) => s.id === selectedSound);
+    if (sound) {
+      alarmAudioRef.current.src = sound.src;
+      alarmAudioRef.current.play();
+
+      // Automatically stop alarm after 5 seconds
+      setTimeout(() => {
+        alarmAudioRef.current.pause();
+        alarmAudioRef.current.currentTime = 0;
+      }, 5000);
+    }
+  };
 
   // Reset logic
   const handleReset = () => {
     setTime(0);
     setIsRunning(false);
+    stopAlarm(); // Ensure alarm is stopped on reset
   };
 
   // Record logic
   const handleRecord = () => {
     setRecords([...records, time]);
+  };
+
+  // Stop alarm
+  const stopAlarm = () => {
+    alarmAudioRef.current.pause();
+    alarmAudioRef.current.currentTime = 0;
   };
 
   // Format time as MM:SS
@@ -42,7 +78,10 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="timer-page"  >
+    <div className="timer-page">
+      {/* Hidden audio element */}
+      <audio ref={alarmAudioRef}></audio>
+
       {/* Header */}
       <div className="header">
         <h2>Timer</h2>
@@ -57,6 +96,21 @@ const TimerPage = () => {
 
       {/* Timer Controls */}
       <div className="timer-controls">
+        {tab === "countdown" && (
+          <input
+            type="number"
+            placeholder="Enter seconds"
+            onChange={(e) => setTime(parseInt(e.target.value, 10))}
+            style={{
+              padding: "5px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+              marginRight: "10px",
+              width: "80px",
+              textAlign: "center",
+            }}
+          />
+        )}
         <button className="start-btn" onClick={() => setIsRunning(!isRunning)}>
           {isRunning ? "Pause" : "Start"}
         </button>
@@ -72,16 +126,50 @@ const TimerPage = () => {
 
       {/* Tabs */}
       <div className="tabs">
-        <button className={tab === "stopwatch" ? "active" : ""} onClick={() => setTab("stopwatch")}>
+        <button
+          className={tab === "stopwatch" ? "active" : ""}
+          onClick={() => setTab("stopwatch")}
+        >
           Stopwatch
         </button>
-        <button className={tab === "countdown" ? "active" : ""} onClick={() => setTab("countdown")}>
+        <button
+          className={tab === "countdown" ? "active" : ""}
+          onClick={() => setTab("countdown")}
+        >
           Countdown
         </button>
-        <button className={tab === "intervals" ? "active" : ""} onClick={() => setTab("intervals")}>
+        <button
+          className={tab === "intervals" ? "active" : ""}
+          onClick={() => setTab("intervals")}
+        >
           Intervals
         </button>
       </div>
+
+      {/* Sound Selection */}
+      {tab === "countdown" && (
+        <div className="sound-selection">
+          <label>
+            Select Alarm Sound:{" "}
+            <select
+              value={selectedSound}
+              onChange={(e) => setSelectedSound(e.target.value)}
+              style={{
+                padding: "5px",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+                marginLeft: "10px",
+              }}
+            >
+              {sounds.map((sound) => (
+                <option key={sound.id} value={sound.id}>
+                  {sound.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )}
 
       {/* Records Section */}
       {tab === "stopwatch" && (
