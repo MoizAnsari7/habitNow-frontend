@@ -1,31 +1,28 @@
-body {
-  background-color: #000;
-  color: #fff;
-  font-family: "Arial", sans-serif;
-}
 
-
+/* Task Page Styles */
 .task-page {
-  /* margin-top: 15% !important; */
-  height: 75vh !important;
-  width: 75vw;
   background-color: #1c1c1c;
   color: #f2f2f2;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
   max-width: 400px;
-  margin: 20px;
-  font-family: "Arial", sans-serif;
+  margin: 20px auto;
+  box-sizing: border-box;
+  overflow-y: auto; /* Enable scrolling inside the container */
+  height: calc(100vh - 100px); /* Full viewport height minus BottomNavbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between elements */
 }
 
+/* Form and Buttons */
 h2 {
   margin-bottom: 20px;
   font-size: 18px;
 }
 
 .form-group {
-  padding: 5px;
-  margin: auto;
+  padding: 5px 0;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
@@ -104,7 +101,7 @@ button {
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 20vh;
+  margin-top: 20px;
 }
 
 .checkbox-label {

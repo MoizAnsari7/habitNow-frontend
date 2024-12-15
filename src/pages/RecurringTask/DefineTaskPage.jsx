@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
-const DefineTaskPage = ({ onNext, onPrevious }) => {
+const DefineTaskPage = ({ onNext, onPrevious,setValue }) => {
   const [taskName, setTaskName] = useState("");
-  const [taskNote, setTaskNote] = useState("");
+    const [taskNote, setTaskNote] = useState("");
 
-  const handleSave = () => {
-    if (!taskName) {
-      alert("Task Name is required!");
-      return;
-    }
-    onSave({ name: taskName, note: taskNote });
-  };
+    const handleSave = () => {
+        if (!taskName) {
+            alert("Task Name is required!");
+            return;
+        }
+        setValue({ name: taskName, note: taskNote });
+    };
+
 
   return (
     <div style={styles.container}>
@@ -35,7 +36,7 @@ const DefineTaskPage = ({ onNext, onPrevious }) => {
         <button style={styles.backButton} onClick={onPrevious}>
           Back
         </button>
-        <button style={styles.saveButton} onClick={onNext}>
+        <button style={styles.saveButton} onClick={()=>{onNext(),handleSave()}}>
           Next
         </button>
       </div>
@@ -50,8 +51,8 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "80vh",
-    backgroundColor: "#000",
+    height: "70vh",
+    backgroundColor: "#1d1d1d",
     color: "#fff",
     padding: "20px",
   },
@@ -81,14 +82,14 @@ const styles = {
     backgroundColor: "#1c1c1e",
     color: "#fff",
     fontSize: "16px",
-    marginBottom: "400px",
+    marginBottom: "200px",
   },
   footer: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
     maxWidth: "400px",
-    marginTop: "20px",
+    marginTop: "10px",
   },
   backButton: {
     flex: 1,

@@ -1,0 +1,80 @@
+.task-page {
+    background-color: #242424;
+    color: #ffffff;
+    height: 100vh;
+    padding: 0px;
+    position: relative;
+    width: 100vw;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .tabs {
+    display: flex;
+    margin-bottom: 16px;
+  }
+  
+  .tab {
+    flex: 2;
+    padding: 8px;
+    text-align: center;
+    background: #242424;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    background: #d32f2f;
+  }
+  
+  .content {
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+  }
+  
+  .task-item {
+    background: #1e1e1e;
+    padding: 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+  
+  .task-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .task-note {
+    font-size: 14px;
+    color: #a5a5a5;
+  }
+  
+  .floating-button {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: #d32f2f;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+
+  .calendar-icon-container{
+    background-color: #242424;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }

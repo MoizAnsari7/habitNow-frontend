@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker"; // Import DatePicker
 import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
 
-const WhenToDoItPage = ({ onPrevious, onNext, onSave }) => {
+const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
+    const handleChange = (event) => {
+        setValue(event.target.value); // Save its own value in the parent state
+    };
   const [startDate, setStartDate] = useState("Today");
   const [endDateEnabled, setEndDateEnabled] = useState(false);
   const [endDate, setEndDate] = useState(null); // State to hold the selected End Date
@@ -12,9 +15,7 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave }) => {
 
   const handleSaveClick = () => {
     const newTask = `Task: Start Date - ${startDate}, End Date - ${endDate ? endDate.toLocaleDateString() : "Not Set"}, Reminders - ${timeReminders}, Priority - ${priority}`;
-    setTask(newTask); // Set the task locally
-    onSave(newTask); // Pass task to HomePage
-    onNext(); // Optionally, move to the next step
+    setValue(newTask);
   };
 
   return (
@@ -92,7 +93,7 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave }) => {
         <button style={styles.backButton} onClick={onPrevious}>
           Back
         </button>
-        <button style={styles.saveButton} onClick={handleSaveClick}>
+        <button style={styles.saveButton}  onClick={()=>{onNext(),handleSaveClick()}}>
           Save
         </button>
       </div>
@@ -108,7 +109,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     height: "80vh",
-    backgroundColor: "#000",
+    backgroundColor: "#1d1d1d",
     color: "#fff",
     padding: "20px",
   },

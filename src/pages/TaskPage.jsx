@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import "./Task.css"; // Updated CSS
+import "./Task.css";
+import { useTaskContext } from "../context/TaskProvider";
+import { useNavigate } from "react-router-dom";
 
 const TaskPage = () => {
+  const { tasks, setTasks } = useTaskContext(); // Access global state
+
   const [taskName, setTaskName] = useState("");
   const [category, setCategory] = useState("Task");
   const [date, setDate] = useState("Today");
@@ -9,20 +13,29 @@ const TaskPage = () => {
   const [notes, setNotes] = useState("");
   const [pending, setPending] = useState(true);
 
+  const navigate = useNavigate();
+
+  // Handle confirm action to add the task
   const handleConfirm = () => {
-    // Task confirmation logic
-    console.log({
+    // Create a new task object
+    const newTask = {
       taskName,
       category,
       date,
       priority,
       notes,
       pending,
-    });
+    };
+
+    // Update the global tasks state
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
+    // Navigate to the tasks page
+    navigate("/myTask");
   };
 
   return (
-    <div className="task-page" >
+    <div className="task-page">
       <h2>New Task</h2>
 
       {/* Task Input */}
@@ -39,13 +52,23 @@ const TaskPage = () => {
       {/* Category Selector */}
       <div className="form-group">
         <label>Category</label>
-        <button className="category-btn">{category}</button>
+        <input
+          type="text"
+          placeholder="Enter category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
       </div>
 
       {/* Date Selector */}
       <div className="form-group">
         <label>Date</label>
-        <button className="date-btn">{date}</button>
+        <input
+          type="text"
+          placeholder="Enter date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </div>
 
       {/* Priority Dropdown */}
@@ -86,7 +109,9 @@ const TaskPage = () => {
 
       {/* Action Buttons */}
       <div className="button-group">
-        <button className="cancel-btn">Cancel</button>
+        <button className="cancel-btn" onClick={() => navigate("/myTask")}>
+          Cancel
+        </button>
         <button className="confirm-btn" onClick={handleConfirm}>
           Confirm
         </button>

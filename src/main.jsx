@@ -1,16 +1,15 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
+
 import "./index.css";
 import App from "./App";
+import { TaskProvider } from "./context/TaskProvider";
 
-const rootElement = document.getElementById("root");
 
-if (rootElement) {
-  createRoot(rootElement).render(
-    <StrictMode>
-      <App />
-    </StrictMode>
-  );
-} else {
-  console.error("Root element not found! Ensure index.html has a <div id='root'>.");
-}
+
+ReactDOM.render(
+  <TaskProvider>
+    <App />
+  </TaskProvider>,
+  document.getElementById("root")
+);
+

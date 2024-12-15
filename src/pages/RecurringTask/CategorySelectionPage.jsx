@@ -15,7 +15,15 @@ const categories = [
   { name: "Outdoor", color: "#ff5722" },
 ];
 
-const CategorySelectionPage = ({ onNext, onPrevious }) => {
+
+
+
+const CategorySelectionPage = ({ onNext, onPrevious, setValue }) => {
+
+  const handleChange = (categoryName) => {
+    setValue(categoryName);
+}; 
+
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Select a Category</h2>
@@ -25,20 +33,13 @@ const CategorySelectionPage = ({ onNext, onPrevious }) => {
           <button
             key={index}
             style={{ ...styles.categoryButton, backgroundColor: category.color }}
-          >
+            onClick={() =>{ onNext(),handleChange(category.name)}}>
             {category.name}
           </button>
         ))}
       </div>
 
-      <div style={styles.footer}>
-        <button style={styles.backButton} onClick={onPrevious}>
-          Back
-        </button>
-        <button style={styles.nextButton} onClick={onNext}>
-          Next
-        </button>
-      </div>
+      
     </div>
   );
 };
@@ -50,8 +51,8 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "80vh",
-    backgroundColor: "#000",
+    height: "75vh",
+    backgroundColor: "#1d1d1d",
     color: "#fff",
     padding: "20px",
   },
