@@ -78,7 +78,7 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="timer-page">
+    <div className="timer-page mt-5">
       {/* Hidden audio element */}
       <audio ref={alarmAudioRef}></audio>
 

@@ -79,6 +79,10 @@ const Sidenav = () => {
           <li className={location.pathname === "/contact" ? "active" : ""}>
             <Link to="/contact">Contact Us</Link>
           </li>
+
+          <li className={location.pathname === "/login" ? "active" : ""}>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
       </div>
     </div>

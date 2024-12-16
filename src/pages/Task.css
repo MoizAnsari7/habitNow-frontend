@@ -1,28 +1,29 @@
 
-/* Task Page Styles */
+
 .task-page {
   background-color: #1c1c1c;
   color: #f2f2f2;
-  padding: 20px;
+  padding: 20px; /* Reduced padding to avoid overlapping */
   border-radius: 10px;
   max-width: 400px;
-  margin: 20px auto;
-  box-sizing: border-box;
-  overflow-y: auto; /* Enable scrolling inside the container */
-  height: calc(100vh - 100px); /* Full viewport height minus BottomNavbar height */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Space between elements */
+  font-family: "Arial", sans-serif;
+  margin: auto; /* Center align the container */
+  box-sizing: border-box; /* Include padding in height calculations */
+  overflow: hidden; /* Allow scrolling inside the container, not the whole page */
+  height: calc(100vh - 60px); /* Subtract the height of the navbar to fit the screen */
 }
 
-/* Form and Buttons */
+
 h2 {
+  align-items: center;
+  text-align: center;
   margin-bottom: 20px;
   font-size: 18px;
 }
 
 .form-group {
-  padding: 5px 0;
+  padding: 5px;
+  margin: auto;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
@@ -101,7 +102,7 @@ button {
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 20vh;
 }
 
 .checkbox-label {
