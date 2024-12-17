@@ -1,14 +1,19 @@
 import React from "react";
+import { useForm } from '../../context/FormContext';
+
 
 const EvaluateProgressPage = ({ onPrevious, onNext,setValue }) => {
+  const { formData, updateFormData } = useForm();
 
   const handleChange = (evaluationType) => {
     setValue(evaluationType);
+    updateFormData('frequency',evaluationType);
+
 };
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>How do you want to evaluate your progress?</h2>
+      <h2 className="mt-5 p-2" style={styles.heading}>How do you want to evaluate your progress?</h2>
 
       <button style={styles.primaryButton} onClick={() =>{onNext(), handleChange("WITH A YES OR NO")}}>WITH A YES OR NO</button>
       <button style={styles.secondaryButton} disabled>
@@ -22,13 +27,13 @@ const EvaluateProgressPage = ({ onPrevious, onNext,setValue }) => {
 
 const styles = {
   container: {
-    width : "90vw",
+    width : "85vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "70vh",
-    backgroundColor: "#1d1d1d",
+    height: "85vh",
+    backgroundColor: "#242424",
     color: "#fff",
     padding: "20px",
   },

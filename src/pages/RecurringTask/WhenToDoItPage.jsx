@@ -1,26 +1,46 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker"; // Import DatePicker
-import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "../../context/FormContext";
 
-const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
-    const handleChange = (event) => {
-        setValue(event.target.value); // Save its own value in the parent state
-    };
-  const [startDate, setStartDate] = useState("Today");
+const WhenToDoItPage = ({ onPrevious, onNext, onSave }) => {
+  const { formData, updateFormData } = useForm();
+
+  const [startDate, setStartDate] = useState(new Date()); // Default to today's date
   const [endDateEnabled, setEndDateEnabled] = useState(false);
-  const [endDate, setEndDate] = useState(null); // State to hold the selected End Date
-  const [timeReminders, setTimeReminders] = useState(0);
-  const [priority, setPriority] = useState("Default");
-  const [task, setTask] = useState(""); // State to hold the task
+  const [endDate, setEndDate] = useState(null);
+  const [reminders, setTimeReminders] = useState(0);
+  const [priority, setPriority] = useState("Medium");
+  const [taskTime, setTaskTime] = useState("08:00"); // Time input field
 
   const handleSaveClick = () => {
-    const newTask = `Task: Start Date - ${startDate}, End Date - ${endDate ? endDate.toLocaleDateString() : "Not Set"}, Reminders - ${timeReminders}, Priority - ${priority}`;
-    setValue(newTask);
+    // Collect all the form data and update it
+    const formDataToSave = {
+      category: formData.category,
+      name: formData.page3Data.name,
+      description: formData.page3Data.note,
+      frequency: formData.frequency,
+      customFrequency: formData.customFrequency,
+      startDate,
+      endDate,
+      endDateEnabled,
+      priority,
+      reminders,
+      time: taskTime,
+    };
+
+    // Update form context with the form data (if needed)
+    updateFormData("page5Data", formDataToSave);
+
+    // Call the onSave function passed from the parent (or directly send API request)
+    if (onSave) {
+      onSave(formDataToSave); // Send data to the parent component or backend
+    }
   };
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>When do you want to do it?</h2>
+      <h2 className="mt-5 p-2" style={styles.heading}>When do you want to do it?</h2>
       <div style={styles.optionContainer}>
         {/* Start Date */}
         <div style={styles.option}>
@@ -28,7 +48,13 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
             <i className="fas fa-calendar-alt" style={styles.icon}></i>
             Start date
           </div>
-          <button style={styles.optionButton}>{startDate}</button>
+          <DatePicker
+            selected={startDate}
+            onChange={setStartDate}
+            dateFormat="MM/dd/yyyy"
+            style={styles.datePicker}
+            todayButton="Today"
+          />
         </div>
 
         {/* End Date */}
@@ -53,7 +79,7 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
           {endDateEnabled && (
             <DatePicker
               selected={endDate}
-              onChange={(date) => setEndDate(date)} // Update the end date
+              onChange={setEndDate}
               dateFormat="MM/dd/yyyy"
               placeholderText="Select End Date"
               style={styles.datePicker}
@@ -61,39 +87,59 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
           )}
         </div>
 
-        {/* Time and Reminders */}
+        {/* Time Picker */}
+        <div style={styles.option}>
+          <div style={styles.optionLabel}>
+            <i className="fas fa-clock" style={styles.icon}></i>
+            Select Time
+          </div>
+          <input
+            type="time"
+            value={taskTime}
+            onChange={(e) => setTaskTime(e.target.value)}
+            style={styles.optionButton}
+          />
+        </div>
+
+        {/* Reminders Input */}
         <div style={styles.option}>
           <div style={styles.optionLabel}>
             <i className="fas fa-bell" style={styles.icon}></i>
-            Time and reminders
+            Reminders
           </div>
-          <button style={styles.optionButton}>{timeReminders}</button>
+          <input
+            type="number"
+            min="0"
+            value={reminders}
+            onChange={(e) => setTimeReminders(e.target.value)}
+            style={styles.optionButton}
+          />
         </div>
 
-        {/* Priority */}
+        {/* Priority Dropdown */}
         <div style={styles.option}>
           <div style={styles.optionLabel}>
             <i className="fas fa-flag" style={styles.icon}></i>
             Priority
           </div>
-          <button style={styles.optionButton}>{priority}</button>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            style={styles.optionButton}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
         </div>
       </div>
-
-      {/* Display Task if exists */}
-      {task && (
-        <div style={styles.taskDisplay}>
-          <h3 style={styles.taskHeading}>Your Task:</h3>
-          <p>{task}</p>
-        </div>
-      )}
 
       {/* Footer Buttons */}
       <div style={styles.footer}>
         <button style={styles.backButton} onClick={onPrevious}>
           Back
         </button>
-        <button style={styles.saveButton}  onClick={()=>{onNext(),handleSaveClick()}}>
+        <button style={styles.saveButton} onClick={handleSaveClick}>
           Save
         </button>
       </div>
@@ -103,15 +149,17 @@ const WhenToDoItPage = ({ onPrevious, onNext, onSave, setValue }) => {
 
 const styles = {
   container: {
-    width: "90vw",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "80vh",
-    backgroundColor: "#1d1d1d",
-    color: "#fff",
-    padding: "20px",
+    width:' 100vw',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-end',
+    height: '84vh',
+    backgroundColor: '#242424',
+    color: 'rgb(255, 255, 255)',
+    padding: '20px',
+    alignContent: 'space-between',
+    flexWrap: 'nowrap'
   },
   heading: {
     fontSize: "24px",
@@ -191,29 +239,6 @@ const styles = {
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-  },
-  taskDisplay: {
-    marginTop: "20px",
-    padding: "10px",
-    backgroundColor: "#1c1c1e",
-    borderRadius: "5px",
-    width: "100%",
-    maxWidth: "400px",
-    textAlign: "center",
-  },
-  taskHeading: {
-    fontSize: "20px",
-    color: "#ff4d6d",
-  },
-  datePicker: {
-    marginTop: "10px",
-    width: "100%",
-    maxWidth: "350px",
-    padding: "10px",
-    backgroundColor: "#1c1c1e",
-    border: "1px solid #ff4d6d",
-    color: "#fff",
-    borderRadius: "5px",
   },
 };
 

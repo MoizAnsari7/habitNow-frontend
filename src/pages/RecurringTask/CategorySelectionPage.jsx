@@ -1,39 +1,46 @@
-import React from "react";
-
-const categories = [
-  { name: "Quit a bad habit", color: "#ff5722" },
-  { name: "Task", color: "#e91e63" },
-  { name: "Study", color: "#9c27b0" },
-  { name: "Entertainment", color: "#00bcd4" },
-  { name: "Finance", color: "#4caf50" },
-  { name: "Work", color: "#795548" },
-  { name: "Home", color: "#ff9800" },
-  { name: "Health", color: "#8bc34a" },
-  { name: "Nutrition", color: "#ff5722" },
-  { name: "Sports", color: "#2196f3" },
-  { name: "Social", color: "#03a9f4" },
-  { name: "Outdoor", color: "#ff5722" },
-];
-
+import {useState, useEffect} from "react";
+import axiosInstance from '../../services/axiosInstance';
+import { useForm } from '../../context/FormContext';
 
 
 
 const CategorySelectionPage = ({ onNext, onPrevious, setValue }) => {
+  const { formData, updateFormData } = useForm();
 
+  const [categories, setCategories] = useState([]); // Dynamic categories
+  
   const handleChange = (categoryName) => {
     setValue(categoryName);
+    updateFormData('category',categoryName);
 }; 
+
+
+
+ // Fetch categories dynamically from backend
+ useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const response = await axiosInstance.get("/category"); // Fetch categories API
+      setCategories(response.data || []); 
+    } catch (err) {
+      console.error("Error fetching categories", err);
+    }
+  };
+
+  fetchCategories();
+}, []);
+
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>Select a Category</h2>
+      <h2 className="mt-5 p-2" style={styles.heading}>Select a Category</h2>
 
       <div style={styles.grid}>
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <button
-            key={index}
+            key={category._id}
             style={{ ...styles.categoryButton, backgroundColor: category.color }}
-            onClick={() =>{ onNext(),handleChange(category.name)}}>
+            onClick={() =>{ onNext(),handleChange(category._id)}}>
             {category.name}
           </button>
         ))}
@@ -46,13 +53,13 @@ const CategorySelectionPage = ({ onNext, onPrevious, setValue }) => {
 
 const styles = {
   container: {
-    width: "90vw",
+    width: "85vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "75vh",
-    backgroundColor: "#1d1d1d",
+    height: "85vh",
+    backgroundColor: "#242424",
     color: "#fff",
     padding: "20px",
   },
