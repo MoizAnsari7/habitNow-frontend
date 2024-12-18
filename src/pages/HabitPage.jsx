@@ -18,7 +18,7 @@ const HabitsPage = () => {
   };
 
   return (
-    <div style={style.habitContainer}>
+    <div style={style.habitContainer} className=" mt-5">
       <h1 style={{ color: "#e91e63" }}></h1>
 
       {/* Habits List */}
@@ -33,7 +33,7 @@ const HabitsPage = () => {
       </div>
 
       {/* Add Habit Button */}
-      <button style={style.addHabitButton} onClick={addHabit}>
+      <button className=" " style={style.addHabitButton} onClick={addHabit}>
         Add Habit
       </button>
     </div>

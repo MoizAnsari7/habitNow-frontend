@@ -61,7 +61,7 @@ const HomePage = () => {
       </div>
 
       {/* Date Scroll */}
-      <div className="date-scroll">
+      <div className="date-scroll ">
         {dates.map((date, index) => (
           <div
             key={index}
