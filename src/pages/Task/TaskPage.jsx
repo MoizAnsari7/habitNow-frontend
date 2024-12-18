@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../services/axiosInstance"; // Custom axios instance
+import axiosInstance from "../../services/axiosInstance"; // Custom axios instance
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
@@ -66,8 +66,8 @@ const TaskPage = () => {
       <h2 className="text-center mb-4 mt-5 p-2">New Task</h2>
 
       {error && <div className="alert alert-danger">{error}</div>}
-
-      <div className="mb-3">
+  <div className="row">
+      <div className="mb-3 col-6">
         <label className="form-label">Task</label>
         <input
           type="text"
@@ -78,7 +78,7 @@ const TaskPage = () => {
         />
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3  col-6">
         <label className="form-label">Category</label>
         <select
           className="form-select"
@@ -96,7 +96,7 @@ const TaskPage = () => {
         </select>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3 col-6">
         <label className="form-label">Date</label>
         <DatePicker
           selected={date}
@@ -107,7 +107,7 @@ const TaskPage = () => {
         />
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3 col-6">
         <label className="form-label">Time</label>
         <TimePicker
           onChange={setTime}
@@ -169,6 +169,7 @@ const TaskPage = () => {
         >
           {loading ? "Saving..." : "Confirm"}
         </button>
+      </div>
       </div>
     </div>
   );

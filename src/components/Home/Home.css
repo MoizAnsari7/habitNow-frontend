@@ -9,7 +9,7 @@
     min-height: 85vh !important; /* Full viewport height */
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: hidden; /* Prevent horizontal scroll */
     padding: 1rem; /* Padding for the container */
     box-sizing: border-box; /* Include padding in the element's width and height */
   }
@@ -202,7 +202,7 @@
 /* Modal Styles */
 .modal {
     position: fixed;
-    top: 450px; /* Initially off-screen at the bottom */
+    top: 350px; /* Initially off-screen at the bottom */
     left: 0;
     width: 100%;
     height: 100%; /* Modal takes up 44% of the screen height */
@@ -351,4 +351,154 @@ a {
 .message span {
   font-size: 14px;
   color: #888; /* Lighter color for the secondary text */
+}
+
+
+
+.task-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px;
+}
+
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-card h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  flex-grow: 1;
+}
+
+.task-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.task-actions .view-icon,
+.task-actions .edit-icon,
+.task-actions .delete-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.task-actions .view-icon:hover {
+  color: #007bff;
+}
+
+.task-actions .edit-icon:hover {
+  color: #28a745;
+}
+
+.task-actions .delete-icon:hover {
+  color: #dc3545;
+}
+
+
+/* Modal Styles */
+.modal-edit-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content-edit {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn-edit {
+  background: #ffff;
+  border: none;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  top: 26vh;
+  right: 15px;
+}
+
+.close-btn-edit:hover {
+  color: #e74c3c;
+}
+
+h3.modal-header {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+form.edit-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label.edit-task-label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+input[type="text"].edit-task-input,
+textarea.edit-task-textarea {
+  font-size: 14px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+textarea.edit-task-textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+button.edit-task-btn {
+  background-color: #e91e63;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.edit-task-btn:hover {
+  background-color: #2980b9;
+}
+
+button.edit-task-btn:focus {
+  outline: none;
+}
+
+button.edit-task-btn:active {
+  background-color: #1c6699;
 }

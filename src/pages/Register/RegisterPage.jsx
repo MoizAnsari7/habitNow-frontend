@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../services/axiosInstance'; // Import the Axios instance
+import axiosInstance from '../../services/axiosInstance'; // Import the Axios instance
 import './Register.css'; // Optional CSS file for styling
 
 const Register = () => {

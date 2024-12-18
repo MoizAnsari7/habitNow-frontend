@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../services/axiosInstance"; // Import your axiosInstance
+import axiosInstance from "../../services/axiosInstance"; // Import your axiosInstance
 import "./Categories.css"; // Ensure you have your CSS file imported
 
 

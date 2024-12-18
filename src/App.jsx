@@ -8,18 +8,18 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Lazy load components for better performance
-const HabitsPage = lazy(() => import("./pages/HabitPage"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const HabitsPage = lazy(() => import("./pages/Habits/HabitPage"));
+const ProfilePage = lazy(() => import("./pages/Profile/ProfilePage"));
 // const SettingPage = lazy(() => import("./pages/SettingPage"));
-const TimerPage = lazy(() => import("./pages/TimerPage"));
-const TaskPage = lazy(() => import("./pages/TaskPage"));
+const TimerPage = lazy(() => import("./pages/Timer/TimerPage"));
+const TaskPage = lazy(() => import("./pages/Task/TaskPage"));
 const RecurringTaskPage = lazy(() =>
   import("./pages/RecurringTask/RecurringTaskPage")
 );
-const MyTaskPage = lazy(() => import("./pages/MyTaskPage"));
-const CategoriesPage = lazy(() => import("./pages/CategoriesPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const MyTaskPage = lazy(() => import("./pages/MyTask/MyTaskPage"));
+const CategoriesPage = lazy(() => import("./pages/Categories/CategoriesPage"));
+const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/Register/RegisterPage"));
 
 const pageVariants = {
   initial: {
