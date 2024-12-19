@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useForm } from '../../context/FormContext';
+
 
 const DefineTaskPage = ({ onNext, onPrevious,setValue }) => {
+  const { formData, updateFormData } = useForm();
+
   const [taskName, setTaskName] = useState("");
     const [taskNote, setTaskNote] = useState("");
 
@@ -10,12 +14,13 @@ const DefineTaskPage = ({ onNext, onPrevious,setValue }) => {
             return;
         }
         setValue({ name: taskName, note: taskNote });
+        updateFormData('page3Data',{ name: taskName, note: taskNote });
     };
 
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>Define Your Task</h2>
+      <h2 className="mt-5 p-2" style={styles.heading}>Define Your Task</h2>
 
       <input
         type="text"
@@ -46,13 +51,13 @@ const DefineTaskPage = ({ onNext, onPrevious,setValue }) => {
 
 const styles = {
   container: {
-    width: "90vw",
+    width: "85vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "70vh",
-    backgroundColor: "#1d1d1d",
+    height: "85vh",
+    backgroundColor: "#242424",
     color: "#fff",
     padding: "20px",
   },

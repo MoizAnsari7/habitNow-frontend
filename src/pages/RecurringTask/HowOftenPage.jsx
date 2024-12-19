@@ -1,16 +1,22 @@
 import React, { useState } from "react";
+import { useForm } from '../../context/FormContext';
+
 
 const HowOftenPage = ({ onPrevious, onNext, setValue }) => {
+  const { formData, updateFormData } = useForm();
+
   const [selectedOption, setSelectedOption] = useState("Every day");
 
   const handleChange = (event) => {
       setSelectedOption(event.target.value);
-      setValue(event.target.value); // Pass selected value to parent state
+      setValue(event.target.value); 
+      updateFormData('customFrequency',event.target.value);
+      // Pass selected value to parent state
   };
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>How often do you want to do it?</h2>
+      <h2 className="mt-5 p-2" style={styles.heading}>How often do you want to do it?</h2>
       <div style={styles.radioContainer}>
         {["Every day", "Specific days of the week", "Specific days of the month", "Specific days of the year", "Some days per period", "Repeat"].map((option) => (
           <label key={option} style={styles.radioLabel}>
@@ -41,13 +47,13 @@ const HowOftenPage = ({ onPrevious, onNext, setValue }) => {
 
 const styles = {
   container: {
-    width: "90vw",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "70vh",
-    backgroundColor: "#1d1d1d",
+    height: "85vh",
+    backgroundColor: "#242424",
     color: "#fff",
     padding: "20px",
   },

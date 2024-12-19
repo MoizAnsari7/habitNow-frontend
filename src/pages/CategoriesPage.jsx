@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../services/axiosInstance"; // Import your axiosInstance
 import "./Categories.css"; // Ensure you have your CSS file imported
+
+
+
+
 
 
 const CategoriesPage = () => {
@@ -19,15 +23,9 @@ const CategoriesPage = () => {
     // Fetch Categories, Icons, and Colors on component mount
     const fetchData = async () => {
       try {
-        const categoriesResponse = await axios.get(
-          "http://localhost:5000/api/category"
-        );
-        const iconsResponse = await axios.get(
-          "http://localhost:5000/api/category/icons"
-        );
-        const colorsResponse = await axios.get(
-          "http://localhost:5000/api/category/colors"
-        );
+        const categoriesResponse = await axiosInstance.get("/category");
+        const iconsResponse = await axiosInstance.get("/category/icons");
+        const colorsResponse = await axiosInstance.get("/category/colors");
 
         if (Array.isArray(categoriesResponse.data)) {
           setCategories(categoriesResponse.data);
@@ -58,10 +56,7 @@ const CategoriesPage = () => {
   const handleCreateCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/category",
-        newCategory
-      );
+      const response = await axiosInstance.post("/category", newCategory);
       if (response.status === 201) {
         setCategories((prevCategories) => [...prevCategories, response.data]);
         setNewCategory({
@@ -116,7 +111,7 @@ const CategoriesPage = () => {
           <form onSubmit={handleCreateCategory} autoComplete="off">
             <div className="row d-flex justify-content-center">
               <div className="col-6">
-                <label htmlFor="name" >Name</label>
+                <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -148,7 +143,7 @@ const CategoriesPage = () => {
                   onChange={handleCategoryChange}
                   autoComplete="off"
                 >
-                  <option value="">Select  icon</option>
+                  <option value="">Select icon</option>
                   {icons.map((icon) => (
                     <option key={icon._id} value={icon.name}>
                       {icon.name}
@@ -166,7 +161,7 @@ const CategoriesPage = () => {
                   onChange={handleCategoryChange}
                   autoComplete="off"
                 >
-                  <option value="">Select  color</option>
+                  <option value="">Select color</option>
                   {colors.map((color) => (
                     <option key={color._id} value={color.hex}>
                       {color.name}

@@ -2,49 +2,62 @@ import React, { useState, useEffect } from "react";
 import { FaPlus, FaCalendarAlt } from "react-icons/fa";
 import "./MyTask.css";
 import { useTaskContext } from "../context/TaskProvider";
-import axiosInstance from '../services/axiosInstance';
+import axiosInstance from "../services/axiosInstance";
 
+const MyTaskPage = ({ setValue }) => {
+  const { tasks, setTasks } = useTaskContext(); // Access global task state
+  const [activeTab, setActiveTab] = useState("single"); // Default tab is "single"
+  const [singleTasks, setSingleTasks] = useState([]); // State for single tasks
+  const [recurringTasks, setRecurringTasks] = useState([]); // State for recurring tasks
 
-const MyTaskPage = ({ finalArray = [], setValue }) => {
-  const { tasks, setTasks } = useTaskContext(); // Access global state
-  const [activeTab, setActiveTab] = useState("single"); // Manage active tab state
-
-  // Effect to update tasks only once when the component mounts
+  // Fetch tasks when the active tab changes
   useEffect(() => {
-    if (finalArray.length > 0) {
-      setTasks((prevTasks) => [...prevTasks, ...finalArray]); // Set global tasks state
-    }
-  }, [finalArray, setTasks]);
+    const fetchTasks = async () => {
+      try {
+        if (activeTab === "single") {
+          const singleTasksResponse = await axiosInstance.get("/task/tasks");
+          setSingleTasks(singleTasksResponse.data.tasks || []);
+        } else if (activeTab === "recurring") {
+          const recurringTasksResponse = await axiosInstance.get(
+            "/recurringTask/recurring-tasks"
+          );
+          setRecurringTasks(recurringTasksResponse.data.recurringTasks || []);
+        }
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
 
-  // Function to render tasks
+    fetchTasks();
+  }, [activeTab]); // Re-run whenever activeTab changes
+
+  // Function to render the task list based on activeTab
   const renderTasks = () => {
-    if (!tasks || tasks.length === 0) {
+    const currentTasks = activeTab === "single" ? singleTasks : recurringTasks;
+
+    if (!currentTasks || currentTasks.length === 0) {
       return (
         <div className="calendar-icon-container">
-        <div className="calendar-icon">
-          <FaCalendarAlt className="big-icon" />
-          <FaPlus className="add-icon" />
+          <div className="calendar-icon">
+            <FaCalendarAlt className="big-icon" />
+            <FaPlus className="add-icon" />
+          </div>
+          <div className="message">
+            <p>There is nothing scheduled</p>
+            <span>Try adding new activities</span>
+          </div>
         </div>
-        <div className="message">
-          <p>There is nothing scheduled</p>
-          <span>Try adding new activities</span>
-        </div>
-      </div>
       );
     }
 
     return (
       <div className="task-list">
-        {tasks.map((item, index) => (
-          <div key={index} className="task-item">
-            {typeof item === "string" ? (
-              <span>{item}</span>
-            ) : (
-              <div>
-                {item.name && <p className="task-name">{item.name}</p>}
-                {item.note && <p className="task-note">{item.note}</p>}
-              </div>
-            )}
+        {currentTasks.map((task) => (
+          <div key={task._id} className="task-item">
+            <div>
+              {task.name && <p className="task-name">{task.name}</p>}
+              {task.note && <p className="task-note">{task.note}</p>}
+            </div>
           </div>
         ))}
       </div>
@@ -52,22 +65,20 @@ const MyTaskPage = ({ finalArray = [], setValue }) => {
   };
 
   return (
-    <div className="task-page" style={{marginTop:"100px"}}>
-    
-
+    <div className="task-page" style={{ marginTop: "100px" }}>
       {/* Tabs */}
       <div className="tabs">
         <button
           className={activeTab === "single" ? "tab active" : "tab"}
           onClick={() => setActiveTab("single")}
         >
-          Single tasks
+          Single Tasks
         </button>
         <button
           className={activeTab === "recurring" ? "tab active" : "tab"}
           onClick={() => setActiveTab("recurring")}
         >
-          Recurring tasks
+          Recurring Tasks
         </button>
       </div>
 
@@ -85,4 +96,3 @@ const MyTaskPage = ({ finalArray = [], setValue }) => {
 };
 
 export default MyTaskPage;
- 
