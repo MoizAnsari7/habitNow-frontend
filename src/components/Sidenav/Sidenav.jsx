@@ -9,14 +9,21 @@ const Sidenav = () => {
 
   // Function to toggle sidenav
   const toggleSidenav = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
-  // Close sidenav when clicking outside
   useEffect(() => {
     const handleOutsideClick = (e) => {
       const sidenavElement = document.querySelector(".sidenav");
-      if (isOpen && sidenavElement && !sidenavElement.contains(e.target)) {
+      const toggleButton = document.querySelector(".toggle-btn");
+
+      // Close the sidenav only if it is open and click occurs outside the sidenav and toggle button
+      if (
+        isOpen &&
+        sidenavElement &&
+        !sidenavElement.contains(e.target) &&
+        !toggleButton.contains(e.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -25,7 +32,8 @@ const Sidenav = () => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isOpen]);
+  }, [isOpen]); // Proper dependency on `isOpen`
+
 
   return (
     <div>
@@ -37,8 +45,8 @@ const Sidenav = () => {
       {/* Sidenav */}
       <div className={`sidenav ${isOpen ? "open" : "closed"}`}>
         <div className="sidenav-header">
-          <h2>HabitNow</h2>
-          <p>
+          <h2 className="mt-4 p-2">HabitNow</h2>
+          <p className="mt-2">
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",
               year: "numeric",

@@ -1,5 +1,5 @@
 .sidenav {
-  width: 250px;
+  width: 250px !important;
   height: 100vh;
   background-color: #000;
   color: #fff;
@@ -79,11 +79,14 @@
   color: white;
   font-size: 10px;
   cursor: pointer;
+  height: 40px;
+  width: 40px;
   z-index: 1100; /* Higher than sidenav */
 }
 
 .toggle-btn:hover {
-  background-color: #ff6583;
+  background-color: #ffff;
+  color: #000;
 }
 
 @media (max-width: 768px) {

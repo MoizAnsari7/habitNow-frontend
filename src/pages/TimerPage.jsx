@@ -83,7 +83,7 @@ const TimerPage = () => {
       <audio ref={alarmAudioRef}></audio>
 
       {/* Header */}
-      <div className="header">
+      <div className="header mt-5">
         <h2>Timer</h2>
       </div>
 
